@@ -22,8 +22,12 @@ public class Product implements Serializable {
     //o set evita repetições é um conjunto
     //precisa instanciar pra não começar nula
     //Set e List apenas interface precisa ser instanciado cm HashSet ou ArrayList
-    //@Transient nn interpreta
-    @Transient
+    //@Transient nn interpreta o JPA
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
