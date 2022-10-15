@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -13,7 +14,8 @@ public class OrderItem implements Serializable {
 
     //anotação para id composto
     @EmbeddedId
-    private OrderItemPK id;
+    //id composto precisa ser instanciado
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -28,8 +30,9 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    //o que vale é o método Get
+    @JsonIgnore
     public Order getOrder() {
-
         return id.getOrder();
     }
 
