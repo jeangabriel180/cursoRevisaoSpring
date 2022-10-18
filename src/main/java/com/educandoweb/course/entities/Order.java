@@ -91,6 +91,17 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
+    //quando marcado como entity
+    //todos os métodos com o começo nomeado como "get"
+    //serão expostos via api quando chamados
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem x : items){
+            sum += x.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
