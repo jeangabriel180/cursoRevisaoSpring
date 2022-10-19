@@ -32,7 +32,14 @@ public class UserResource {
     @PostMapping
     public ResponseEntity<User> insert(@RequestBody User obj) {
         obj = service.insert(obj);
+        //setar o caminho do objeto inserido no header
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
